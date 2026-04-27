@@ -2,5 +2,12 @@
 name = "FeOSMK1"
 version = "0.1.0"
 edition = "2024"
+authors = ["Authors Harsh.shokka@gmail.com"]
 
 [dependencies]
+
+[profile.dev]
+panic = "abort" # disable stack unwinding on panic 
+
+[profile.release]
+panic = "abort" # disable stack unwinding on panic 

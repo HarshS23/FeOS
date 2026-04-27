@@ -1,7 +1,3 @@
-// disabling the standard rust library 
-#![no_std]
-// now we cannot print anything to the terminal 
-// becuase we have disabled the standard library 
 
 /*
 
@@ -12,6 +8,43 @@ Things to implement
     
 */ 
 
-fn main() {
-    //println!("Hello, world!");
+
+/*
+=========================================================================
+|                            Panic Handler                              |
+=========================================================================
+        - The compiler invokes this function if a panic occurs 
+arguments: 
+        - the PanicInfo parameter is file and line where the panic happened
+
+return: 
+        - the function should never return so we use the !
+        - ! means that this function will never return 
+        
+*/
+
+// disabling the standard rust library 
+#![no_std]
+// we want out rust os to run without the main
+// function so we use no_main attribute 
+#![no_main]
+// now we are overwriting the operating system entry point 
+// with our own _start function
+
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> !{
+    loop{}
 }
+
+#[unsafe(no_mangle)]
+pub extern "C" fn _start() -> ! { // no return 
+    loop {}
+}
+
+// cargo build --target thumbv7em-none-eabihf
+// we use a custom target that describes the x86_64 bit architecture
+
+
+// fn main() {}
