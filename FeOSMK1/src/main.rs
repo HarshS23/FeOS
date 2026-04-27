@@ -12,6 +12,28 @@ Things to implement
     
 */ 
 
+
+/*
+=========================================================================
+|                            Panic Handler                              |
+=========================================================================
+        - The compiler invokes this function if a panic occurs 
+arguments: 
+        - the PanicInfo parameter is file and line where the panic happened
+
+return: 
+        - the function should never return so we use the !
+        - ! means that this function will never return 
+        
+*/
+
+#[PanicHandler]
+fn panic(_info: &PanicInfo) -> !{
+    loop{}
+}
+
 fn main() {
     //println!("Hello, world!");
+
+
 }
