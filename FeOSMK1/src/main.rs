@@ -1,3 +1,11 @@
+/*
+=========================================================================
+|                            Compilation Command                        |
+=========================================================================
+        Compulation code for mac os : cargo rustc -- -C link-args="-e __start -static -nostartfiles"
+
+*/
+
 
 /*
 
@@ -35,6 +43,8 @@ use core::panic::PanicInfo;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> !{
+    // This function is the entry point, since the linker looks for a 
+    // function  named _start by default
     loop{}
 }
 
@@ -45,6 +55,3 @@ pub extern "C" fn _start() -> ! { // no return
 
 // cargo build --target thumbv7em-none-eabihf
 // we use a custom target that describes the x86_64 bit architecture
-
-
-// fn main() {}

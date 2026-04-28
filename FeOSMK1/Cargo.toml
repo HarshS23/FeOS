@@ -11,3 +11,9 @@ panic = "abort" # disable stack unwinding on panic
 
 [profile.release]
 panic = "abort" # disable stack unwinding on panic 
+
+# double brackets means keys that can appear multiple times
+[[bin]]
+name = "FeOSMK1"
+test = false # do not build binary in test mode 
+bench = false # do not build binary in bench mode 
