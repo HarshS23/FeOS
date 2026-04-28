@@ -35,6 +35,8 @@ use core::panic::PanicInfo;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> !{
+    // This function is the entry point, since the linker looks for a 
+    // function  named _start by default
     loop{}
 }
 
