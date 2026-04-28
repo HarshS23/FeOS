@@ -32,12 +32,9 @@ return:
 */
 
 // disabling the standard rust library 
-#![no_std]
-// we want out rust os to run without the main
-// function so we use no_main attribute 
-#![no_main]
-// now we are overwriting the operating system entry point 
-// with our own _start function
+#![no_std] // dont link the rust standard library
+
+#![no_main] // disable all rust level entry points
 
 use core::panic::PanicInfo;
 
