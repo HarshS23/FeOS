@@ -40,7 +40,7 @@ impl ColorCode {
 
 struct ScreenChar{
     ascii_character: u8, 
-    color_code = ColorCode,
+    color_code: ColorCode,
 }
 
 const BUFFER_HEIGHT: usize = 25;
@@ -65,13 +65,11 @@ impl Writer {
     pub fn write_byte(&mut self, byte: u8){
         // checking if theres a new line character 
         match byte { 
-           if byte == b'\n' {
-            self.new_line()
-           }
-        }
+           b'\n' => self.new_line(),
 
-        // writer checks if the current line is full 
-        byte => {
+
+            // writer checks if the current line is full 
+            byte => {
             // if full --> wrap and use a new line 
             if self.column_pos >= BUFFER_WIDTH { 
                 self.new_line()
@@ -88,10 +86,46 @@ impl Writer {
                 color_code,
             };
             // once writing is donw we move to the next column 
-            self.column_position += 1
+            self.column_pos += 1
+            }
         }
+
+       
     }
 
 
     fn new_line(&mut self ){ /* need to finish */}
+}
+
+// Printing whole strings 
+// to print them we convert them to bytes then print them one by one 
+
+impl Writer { 
+    pub fn write_string(&mut self, s: &str){
+        for i in s.bytes(){
+            match i { // match is like a switch statement 
+                // printable ascii byte or new line
+                0x20..=0x7e | b'\n' => self.write_byte(i),
+                // if its not a printable ascii 
+                _ => self.write_byte(0xfe), // basically a white square == 0xfe 
+            }
+
+
+        }
+    }
+}
+
+// testing 
+pub fn printTest() { 
+    let mut writer = Writer {
+        column_pos: 0,
+        color_code: ColorCode::new(Color::Yellow, Color::Black),
+        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
+
+    };
+
+    writer.write_byte(b'H');
+    writer.write_string("ello ");
+    writer.write_string("Wörld!");
+
 }

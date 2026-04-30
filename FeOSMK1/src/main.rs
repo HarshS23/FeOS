@@ -6,6 +6,7 @@
 
 
         This command runs the current code on QEMU:
+        cargo bootimage
         qemu-system-x86_64 -drive format=raw,file=target/x86_64-FeOSMK1/debug/bootimage-FeOSMK1.bin
 
 */
@@ -56,7 +57,8 @@ fn panic(_info: &PanicInfo) -> !{
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! { // no return 
-    let vga_buffer = 0xb8000 as *mut u8;
+    //let vga_buffer = 0xb8000 as *mut u8;
+    vga_buffer::printTest();
 
     // for (i, &byte) in HELLO.iter().enumerate() {
     //     unsafe {
@@ -71,3 +73,4 @@ pub extern "C" fn _start() -> ! { // no return
 
 // cargo build --target thumbv7em-none-eabihf
 // we use a custom target that describes the x86_64 bit architecture
+
