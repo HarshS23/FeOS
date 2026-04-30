@@ -95,3 +95,24 @@ impl Writer {
 
     fn new_line(&mut self ){ /* need to finish */}
 }
+
+// Printing whole strings 
+// to print them we convert them to bytes then print them one by one 
+
+impl Writer { 
+    pub fn write_string(&mut self, &s: str){
+        for i in s.bytes(){
+            match byte { // match is like a switch statement 
+                // printable ascii byte or new line
+                0x20..=0x7e | b'\n' => self.write_byte(byte),
+                // if its not a printable ascii 
+                _ => self.write_byte(0xfe), // basically a white square == 0xfe 
+            }
+
+
+        }
+    }
+}
+
+// testing 
+pub 
