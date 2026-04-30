@@ -10,4 +10,4 @@ target = "x86_64-FeOSMK1.json"
 runner = "bootimage runner"
 
 
-qemu-system-x86_64 -drive format=raw,file=target/x86_64-FeOSMK1/debug/bootimage-FeOSMK1.bin
+
