@@ -61,20 +61,23 @@ pub struct Writer {
 
 
 // Printing 
-
-impl Writer { 
+impl Writer {
     pub fn write_byte(&mut self, byte: u8){
+        // checking if theres a new line character 
         match byte { 
            if byte == b'\n' {
             self.new_line()
            }
         }
 
+        // writer checks if the current line is full 
         byte => {
+            // if full --> wrap and use a new line 
             if self.column_pos >= BUFFER_WIDTH { 
                 self.new_line()
             }
-
+            
+            // writing to the screen
             let row = BUFFER_HEIGHT - 1;
             let col = self.column_pos;
 
@@ -84,6 +87,7 @@ impl Writer {
                 ascii_character: byte,
                 color_code,
             };
+            // once writing is donw we move to the next column 
             self.column_position += 1
         }
     }
