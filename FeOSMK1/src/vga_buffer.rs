@@ -50,3 +50,44 @@ const BUFFER_WIDTH: usize = 80;
 struct Buffer {
     chars: [[ScreenChar; BUFFER_WIDTH]; BUFFER_HEIGHT]
 }
+
+//The writer will always write to the last line and shift lines up when a line is full or
+// when we run into a \n.
+pub struct Writer { 
+    column_pos: usize,  // track the current postion of the last row 
+    color_code : ColorCode, // 
+    buffer: &'static mut Buffer, 
+}
+
+
+// Printing 
+
+impl Writer { 
+    pub fn write_byte(&mut self, byte: u8){
+        match byte { 
+           if byte == b'\n' {
+            self.new_line()
+           }
+        }
+
+        byte => {
+            if self.column_pos >= BUFFER_WIDTH { 
+                self.new_line()
+            }
+
+            let row = BUFFER_HEIGHT - 1;
+            let col = self.column_pos;
+
+            let color_code = self.color_code;
+
+            self.buffer.chars[row][col] = ScreenChar { 
+                ascii_character: byte,
+                color_code,
+            };
+            self.column_position += 1
+        }
+    }
+
+
+    fn new_line(&mut self ){ /* need to finish */}
+}
