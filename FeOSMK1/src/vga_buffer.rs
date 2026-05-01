@@ -99,7 +99,7 @@ impl Writer {
     }
 
 
-    fn new_line(&mut self ){ /* need to finish */}
+    fn new_line(&mut self)
 }
 
 
@@ -107,16 +107,16 @@ impl Writer {
     fn new_line(&mut self){
         for row in 1..BUFFER_HEIGHT{
             for col in 1..BUFFER_WIDTH{
-                let character = self.buffer.chars[row][col].read()
+                let character = self.buffer.chars[row][col].read();
                 self.buffer.char[row - 1][col].write(character)
             }
         }
 
         self.clear_row(BUFFER_HEIGHT - 1);
-        self.column_position = 0;
+        self.column_pos = 0;
     }
 
-    fn clear_row(&mut self, row: usize){/* To findsh */}
+    fn clear_row(&mut self, row: usize)
 }
 
 
@@ -132,6 +132,7 @@ impl Writer{
         }
     }
 }
+
 
 // Printing whole strings 
 // to print them we convert them to bytes then print them one by one 
@@ -165,6 +166,16 @@ impl fmt::Write for Writer {
     }
 }
 // Now we can use Rusts  Write! and Writeln!
+
+
+// Global Interface 
+// making a global writer in which 
+pub static Writer: Writer = Writer { 
+    column_pos: 0,
+    color_code: ColorCode::new(Color::Yellow, Color::Black),
+    buffer: unsafe {&mut *(0xb8000 as *mut Buffer)},
+};
+
 
 
 // testing 
