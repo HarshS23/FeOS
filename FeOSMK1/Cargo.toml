@@ -6,6 +6,7 @@ authors = ["Authors Harsh.shokka@gmail.com"]
 
 [dependencies]
 bootloader = "0.9.8"
+volatile = "0.2.6"
 
 
 [profile.dev]
@@ -19,4 +20,6 @@ panic = "abort" # disable stack unwinding on panic
 name = "FeOSMK1"
 test = false # do not build binary in test mode 
 bench = false # do not build binary in bench mode 
+
+
 
