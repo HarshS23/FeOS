@@ -46,8 +46,8 @@ struct ScreenChar{
 const BUFFER_HEIGHT: usize = 25;
 const BUFFER_WIDTH: usize = 80;
 
-#[repr(transparent)]
-use volatile::Volatile 
+// #[repr(transparent)]
+use volatile::Volatile;
 struct Buffer{
     chars:[[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT]
 }
@@ -102,6 +102,23 @@ impl Writer {
     fn new_line(&mut self ){ /* need to finish */}
 }
 
+
+impl Writer {
+    fn new_line(&mut self){
+        for row in 1..BUFFER_HEIGHT{
+            for col in 1..BUFFER_WIDTH{
+                let character = self.buffer.chars[row][col].read()
+                self.buffer.char[row - 1][col].write(character)
+            }
+        }
+
+        self.clear_row(BUFFER_HEIGHT - 1);
+        self.column_position = 0;
+    }
+
+    fn clear_row(&mut self, row: usize){/* To findsh */}
+}
+
 // Printing whole strings 
 // to print them we convert them to bytes then print them one by one 
 
@@ -121,11 +138,24 @@ impl Writer {
 }
 
 
+// Formating Macros 
+//      - Purpose is to easily print integers, floats 
+//        and different types 
 
+use core::fmt;
+impl fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        self.write_string(s);
+        Ok(())
+
+    }
+}
+// Now we can use Rusts  Write! and Writeln!
 
 
 // testing 
 pub fn printTest() { 
+    use core::fmt::Write;
     let mut writer = Writer {
         column_pos: 0,
         color_code: ColorCode::new(Color::Yellow, Color::Black),
@@ -134,8 +164,8 @@ pub fn printTest() {
     };
 
     writer.write_byte(b'H');
-    writer.write_string("ello ");
-    writer.write_string("Wörld!");
+    writer.write_string("ello! Adharsh Shokkalingam ");
+    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0).unwrap();
 
 }
 
