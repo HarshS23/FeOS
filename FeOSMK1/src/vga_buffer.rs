@@ -119,6 +119,20 @@ impl Writer {
     fn clear_row(&mut self, row: usize){/* To findsh */}
 }
 
+
+impl Writer{
+    fn clear_row(&mut self, row: usize){
+        let blank = ScreenChar { 
+            ascii_character: b' ', 
+            color_code: self.color_code, 
+        };
+
+        for col in 0..BUFFER_WIDTH { 
+            self.buffer.chars[row][col].write(blank)
+        }
+    }
+}
+
 // Printing whole strings 
 // to print them we convert them to bytes then print them one by one 
 
