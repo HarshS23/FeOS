@@ -47,9 +47,11 @@ const BUFFER_HEIGHT: usize = 25;
 const BUFFER_WIDTH: usize = 80;
 
 #[repr(transparent)]
-struct Buffer {
-    chars: [[ScreenChar; BUFFER_WIDTH]; BUFFER_HEIGHT]
+use volatile::Volatile 
+struct Buffer{
+    chars:[[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT]
 }
+
 
 //The writer will always write to the last line and shift lines up when a line is full or
 // when we run into a \n.
@@ -70,23 +72,26 @@ impl Writer {
 
             // writer checks if the current line is full 
             byte => {
-            // if full --> wrap and use a new line 
-            if self.column_pos >= BUFFER_WIDTH { 
-                self.new_line()
-            }
+                // if full --> wrap and use a new line 
+                if self.column_pos >= BUFFER_WIDTH { 
+                    self.new_line()
+                }
             
-            // writing to the screen
-            let row = BUFFER_HEIGHT - 1;
-            let col = self.column_pos;
+                // writing to the screen
+                let row = BUFFER_HEIGHT - 1;
+                let col = self.column_pos;
 
-            let color_code = self.color_code;
+                let color_code = self.color_code;
 
-            self.buffer.chars[row][col] = ScreenChar { 
-                ascii_character: byte,
-                color_code,
-            };
-            // once writing is donw we move to the next column 
-            self.column_pos += 1
+                self.buffer.chars[row][col].write(ScreenChar { 
+                    ascii_character: byte,
+                    color_code,
+                });
+                // once writing is donw we move to the next column 
+                self.column_pos += 1
+
+
+                
             }
         }
 
@@ -115,6 +120,10 @@ impl Writer {
     }
 }
 
+
+
+
+
 // testing 
 pub fn printTest() { 
     let mut writer = Writer {
@@ -129,3 +138,4 @@ pub fn printTest() {
     writer.write_string("Wörld!");
 
 }
+
