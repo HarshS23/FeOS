@@ -57,16 +57,9 @@ fn panic(_info: &PanicInfo) -> !{
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! { // no return 
-    //let vga_buffer = 0xb8000 as *mut u8;
-    vga_buffer::printTest();
-
-    // for (i, &byte) in HELLO.iter().enumerate() {
-    //     unsafe {
-    //         *vga_buffer.offset(i as isize * 2) = byte;
-    //         *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-    //     }
-    // }
-
+    use core::fmt::Write;
+    vga_buffer::WRITER.lock().write_string("Hello, I bootup again").unwrap();
+    write!(vga_buffer::WRITER.lock(), "Test some numbers Decmimal: {}, Float: {}", 42, 3.14).unwrap();
 
     loop {}
 }

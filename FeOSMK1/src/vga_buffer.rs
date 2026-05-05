@@ -63,6 +63,8 @@ pub struct Writer {
 
 
 // Printing 
+/* The buffer struct represents the memeory layout, using a 2d array of Volatile <ScreenChars>
+to ensure safe writes to memory mapped I/O  */
 impl Writer {
     pub fn write_byte(&mut self, byte: u8){
         // checking if theres a new line character 
@@ -99,7 +101,7 @@ impl Writer {
     }
 
 
-    fn new_line(&mut self)
+    fn new_line(&mut self);
 }
 
 
@@ -116,7 +118,7 @@ impl Writer {
         self.column_pos = 0;
     }
 
-    fn clear_row(&mut self, row: usize)
+    fn clear_row(&mut self, row: usize);
 }
 
 
@@ -153,6 +155,7 @@ impl Writer {
 }
 
 
+
 // Formating Macros 
 //      - Purpose is to easily print integers, floats 
 //        and different types 
@@ -167,6 +170,18 @@ impl fmt::Write for Writer {
 }
 // Now we can use Rusts  Write! and Writeln!
 
+// now we can define our static writer without any problems 
+use lazy_static::lazy_static;
+
+lazy_static!{
+    pub static ref WRITER: Writer = Writer { 
+        column_pos: 0, 
+        color_code: ColorCode::new(Color::Yellow, Color::Black), 
+        buffer: unsafe {&mut *(0xb8000 as *mut Buffer)} 
+    };
+}
+
+
 
 // Global Interface 
 // making a global writer in which 
@@ -177,20 +192,20 @@ pub static Writer: Writer = Writer {
 };
 
 
+// Now we can remove this, imma leave it for now just to test
+// // testing 
+// pub fn printTest() { 
+//     use core::fmt::Write;
+//     let mut writer = Writer {
+//         column_pos: 0,
+//         color_code: ColorCode::new(Color::Yellow, Color::Black),
+//         buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
 
-// testing 
-pub fn printTest() { 
-    use core::fmt::Write;
-    let mut writer = Writer {
-        column_pos: 0,
-        color_code: ColorCode::new(Color::Yellow, Color::Black),
-        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
+//     };
 
-    };
+//     writer.write_byte(b'H');
+//     writer.write_string("ello! Adharsh Shokkalingam ");
+//     write!(writer, "The numbers are {} and {}", 42, 1.0/3.0).unwrap();
 
-    writer.write_byte(b'H');
-    writer.write_string("ello! Adharsh Shokkalingam ");
-    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0).unwrap();
-
-}
+// }
 
