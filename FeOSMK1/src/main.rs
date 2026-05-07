@@ -53,17 +53,16 @@ fn panic(_info: &PanicInfo) -> !{
     loop{}
 }
 
-//static HELLO: &[u8] = b"Hello World!";
-
 #[unsafe(no_mangle)]
-pub extern "C" fn _start() -> ! { // no return 
-    use core::fmt::Write;
-    vga_buffer::WRITER.lock().write_string("Hello, I bootup again").unwrap();
-    write!(vga_buffer::WRITER.lock(), "Test some numbers Decmimal: {}, Float: {}", 42, 3.14).unwrap();
-
+pub extern "C" fn _start() -> ! {
+        println!(" My name is Adharsh !!!! : {}", 5);
     loop {}
+
 }
 
+
+
+//static HELLO: &[u8] = b"Hello World!"
 // cargo build --target thumbv7em-none-eabihf
 // we use a custom target that describes the x86_64 bit architecture
 
