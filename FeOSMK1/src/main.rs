@@ -57,7 +57,7 @@ fn panic(info: &PanicInfo) -> !{
 pub extern "C" fn _start() -> ! {
     println!(" IDK IM MAKIN SURE IT WORKS   !!!! : {}", 5.12980);
     panic!("THIS IS A PANIC MESSAGE");
-    loop {}
+    //loop {} - this is unreachable after the panic happens 
 }
 
 
