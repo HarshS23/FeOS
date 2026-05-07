@@ -66,6 +66,7 @@ pub struct Writer {
 /* The buffer struct represents the memeory layout, using a 2d array of Volatile <ScreenChars>
 to ensure safe writes to memory mapped I/O  */
 impl Writer {
+
     pub fn write_byte(&mut self, byte: u8){
         // checking if theres a new line character 
         match byte { 
@@ -100,29 +101,17 @@ impl Writer {
        
     }
 
-
-    fn new_line(&mut self);
-}
-
-
-impl Writer {
     fn new_line(&mut self){
         for row in 1..BUFFER_HEIGHT{
             for col in 1..BUFFER_WIDTH{
                 let character = self.buffer.chars[row][col].read();
-                self.buffer.char[row - 1][col].write(character)
+                self.buffer.chars[row - 1][col].write(character)
             }
         }
-
         self.clear_row(BUFFER_HEIGHT - 1);
         self.column_pos = 0;
     }
 
-    fn clear_row(&mut self, row: usize);
-}
-
-
-impl Writer{
     fn clear_row(&mut self, row: usize){
         let blank = ScreenChar { 
             ascii_character: b' ', 
@@ -133,13 +122,7 @@ impl Writer{
             self.buffer.chars[row][col].write(blank)
         }
     }
-}
 
-
-// Printing whole strings 
-// to print them we convert them to bytes then print them one by one 
-
-impl Writer { 
     pub fn write_string(&mut self, s: &str){
         for i in s.bytes(){
             match i { // match is like a switch statement 
@@ -152,13 +135,9 @@ impl Writer {
 
         }
     }
+
 }
 
-
-
-// Formating Macros 
-//      - Purpose is to easily print integers, floats 
-//        and different types 
 
 use core::fmt;
 impl fmt::Write for Writer {

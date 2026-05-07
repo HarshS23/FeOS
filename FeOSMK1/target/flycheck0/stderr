@@ -1,5 +1,5 @@
-   0.076445833s  INFO prepare_target{force=false package_id=FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1) target="FeOSMK1"}: cargo::core::compiler::fingerprint: fingerprint error for FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1)/Check { test: false }/TargetInner { name: "FeOSMK1", tested: false, benched: false, doc: true, ..: with_path("/Users/adharsh/Desktop/FeOS/FeOSMK1/src/main.rs", Edition2024) }
-   0.076465250s  INFO prepare_target{force=false package_id=FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1) target="FeOSMK1"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/FeOSMK1-e2c01f8e8ff995c2/bin-FeOSMK1`
+   0.076665375s  INFO prepare_target{force=false package_id=FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1) target="FeOSMK1"}: cargo::core::compiler::fingerprint: fingerprint error for FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1)/Check { test: false }/TargetInner { name: "FeOSMK1", tested: false, benched: false, doc: true, ..: with_path("/Users/adharsh/Desktop/FeOS/FeOSMK1/src/main.rs", Edition2024) }
+   0.076685917s  INFO prepare_target{force=false package_id=FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1) target="FeOSMK1"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/FeOSMK1-e2c01f8e8ff995c2/bin-FeOSMK1`
 
 Caused by:
     No such file or directory (os error 2)
@@ -23,4 +23,4 @@ Stack backtrace:
   15: std::rt::lang_start_internal
   16: _main
     Checking FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1)
-error: could not compile `FeOSMK1` (bin "FeOSMK1") due to 11 previous errors
+error: could not compile `FeOSMK1` (bin "FeOSMK1") due to 3 previous errors
