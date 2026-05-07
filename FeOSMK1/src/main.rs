@@ -47,17 +47,17 @@ mod vga_buffer;
 use core::panic::PanicInfo;
 
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> !{
-    // This function is the entry point, since the linker looks for a 
-    // function  named _start by default
-    loop{}
+fn panic(info: &PanicInfo) -> !{
+        println!("{}", info);
+        loop{}
 }
+
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
-        println!(" My name is Adharsh !!!! : {}", 5);
+    println!(" IDK IM MAKIN SURE IT WORKS   !!!! : {}", 5.12980);
+    panic!("THIS IS A PANIC MESSAGE");
     loop {}
-
 }
 
 

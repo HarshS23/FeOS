@@ -180,16 +180,6 @@ lazy_static!{
     });
 }
 
-
-// Global Interface 
-// making a global writer in which 
-// pub static WRITER: Writer = Writer { 
-//     column_pos: 0,
-//     color_code: ColorCode::new(Color::Yellow, Color::Black),
-//     buffer: unsafe {&mut *(0xb8000 as *mut Buffer)},
-// };
-
-
 #[macro_export]
 macro_rules! print {
     ($($arg:tt)*) => ($crate::vga_buffer::_print(format_args!($($arg)*)));
