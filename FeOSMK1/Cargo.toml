@@ -7,6 +7,7 @@ authors = ["Authors Harsh.shokka@gmail.com"]
 [dependencies]
 bootloader = "0.9.8"
 volatile = "0.2.6"
+spin = "0.5.2"
 
 [dependencies.lazy_static]
 version = "1.0"
@@ -23,6 +24,7 @@ panic = "abort" # disable stack unwinding on panic
 name = "FeOSMK1"
 test = false # do not build binary in test mode 
 bench = false # do not build binary in bench mode 
+
 
 
 
