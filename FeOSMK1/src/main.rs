@@ -55,8 +55,8 @@ fn panic(info: &PanicInfo) -> !{
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
-    println!(" IDK IM MAKIN SURE IT WORKS   !!!! : {}", 5.12980);
-    panic!("THIS IS A PANIC MESSAGE");
+    println!("This is a floating point number: {}", 5.12980);
+    panic!("some panic message");
     //loop {} - this is unreachable after the panic happens 
 }
 
