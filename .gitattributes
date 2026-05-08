@@ -1,0 +1,6 @@
+# Tell GitHub Linguist to ignore these
+Makefile linguist-detectable=false
+*.mk linguist-detectable=false
+
+# Explicitly mark Rust as the main language
+*.rs linguist-detectable=true
