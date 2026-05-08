@@ -1,3 +1,7 @@
+#![feature(custom_test_frameworks)]
+#![test_runner(crate::test_runner)]
+#![reexport_test_harness_main = "test_main"]
+
 /*
 =========================================================================
 |                            Compilation Command                        |
@@ -41,6 +45,8 @@ return:
 
 #![no_main] // disable all rust level entry points
 
+// making a custom testing frame work 
+
 // modules --> like #include in C/C++
 mod vga_buffer;
 
@@ -53,12 +59,36 @@ fn panic(info: &PanicInfo) -> !{
 }
 
 
+#[cfg(test)]
+pub fn test_runner(tests: &[&dyn Fn()]) {
+        println!("Running Tests: {}", tests.len());
+        for i in tests{
+                i();
+        }
+}
+
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
     println!("This is a floating point number: {}", 5.12980);
-    panic!("some panic message");
-    //loop {} - this is unreachable after the panic happens 
+    #[cfg(test)]
+    test_main();
+    //panic!("some panic message");
+    loop {} //- this is unreachable after the panic happens 
 }
+
+#[test_case]
+fn trivial_asseration(){
+        println!("TEST 1| TEST RESULT -->");
+        assert_eq!(1,1);
+        println!("PASS")
+}
+
+// #[test_case]
+// fn fail_test(){
+//         println!("TEST 2 | TEST RESULT ---> ");
+//         assert_eq!(1,0);
+//         println!("FAIL");
+// }
 
 
 

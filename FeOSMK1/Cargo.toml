@@ -20,10 +20,14 @@ panic = "abort" # disable stack unwinding on panic
 panic = "abort" # disable stack unwinding on panic 
 
 # double brackets means keys that can appear multiple times
-[[bin]]
+[[bin]] # specifies how cargo should compile the executable 
 name = "FeOSMK1"
-test = false # do not build binary in test mode 
+test = true # do not build binary in test mode 
 bench = false # do not build binary in bench mode 
+
+[package.metadata.bootimage]
+test-args = ["-device", "isa-debug-exit,iobase=0xf4,iosize=0x04"]
+
 
 
 
