@@ -1,0 +1,349 @@
+warning: unused manifest key: dependencies.lazy_static.uart_16550
+warning: unused manifest key: dependencies.lazy_static.x86_64
+   0.074811375s  INFO prepare_target{force=false package_id=FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1) target="FeOSMK1"}: cargo::core::compiler::fingerprint: fingerprint error for FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1)/Check { test: false }/TargetInner { name: "FeOSMK1", benched: false, doc: true, ..: with_path("/Users/adharsh/Desktop/FeOS/FeOSMK1/src/main.rs", Edition2024) }
+   0.074832917s  INFO prepare_target{force=false package_id=FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1) target="FeOSMK1"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/FeOSMK1-0c2a15a9f24d7dfb/bin-FeOSMK1`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   7: cargo::ops::cargo_compile::compile_ws
+   8: cargo::ops::cargo_compile::compile_with_exec
+   9: cargo::ops::cargo_compile::compile
+  10: cargo::commands::check::exec
+  11: <cargo::cli::Exec>::exec
+  12: cargo::main
+  13: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  14: std::rt::lang_start::<()>::{closure#0}
+  15: std::rt::lang_start_internal
+  16: _main
+   0.094013584s  INFO prepare_target{force=false package_id=bootloader v0.9.34 target="bootloader"}: cargo::core::compiler::fingerprint: fingerprint error for bootloader v0.9.34/Check { test: false }/TargetInner { ..: lib_target("bootloader", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bootloader-0.9.34/src/lib.rs", Edition2018) }
+   0.094025417s  INFO prepare_target{force=false package_id=bootloader v0.9.34 target="bootloader"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/bootloader-6adfe3ccf5147dc5/lib-bootloader`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.094990917s  INFO prepare_target{force=false package_id=compiler_builtins v0.1.160 (/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/compiler-builtins/compiler-builtins) target="compiler_builtins"}: cargo::core::compiler::fingerprint: fingerprint error for compiler_builtins v0.1.160 (/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/compiler-builtins/compiler-builtins)/Build/TargetInner { name_inferred: true, tested: false, benched: false, doc: false, doctest: false, ..: lib_target("compiler_builtins", ["lib"], "/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/compiler-builtins/compiler-builtins/src/lib.rs", Edition2024) }
+   0.095001500s  INFO prepare_target{force=false package_id=compiler_builtins v0.1.160 (/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/compiler-builtins/compiler-builtins) target="compiler_builtins"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/compiler_builtins-96302b1e429d959e/lib-compiler_builtins`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.095296084s  INFO prepare_target{force=false package_id=core v0.0.0 (/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/core) target="core"}: cargo::core::compiler::fingerprint: fingerprint error for core v0.0.0 (/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/core)/Build/TargetInner { name_inferred: true, tested: false, benched: false, ..: lib_target("core", ["lib"], "/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/lib.rs", Edition2024) }
+   0.095304834s  INFO prepare_target{force=false package_id=core v0.0.0 (/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/core) target="core"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/core-58c45c37f84d71f7/lib-core`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.095545667s  INFO prepare_target{force=false package_id=lazy_static v1.5.0 target="lazy_static"}: cargo::core::compiler::fingerprint: fingerprint error for lazy_static v1.5.0/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("lazy_static", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs", Edition2015) }
+   0.095553209s  INFO prepare_target{force=false package_id=lazy_static v1.5.0 target="lazy_static"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/lazy_static-4644584775e6a35a/lib-lazy_static`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.095870834s  INFO prepare_target{force=false package_id=spin v0.9.8 target="spin"}: cargo::core::compiler::fingerprint: fingerprint error for spin v0.9.8/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("spin", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spin-0.9.8/src/lib.rs", Edition2015) }
+   0.095877667s  INFO prepare_target{force=false package_id=spin v0.9.8 target="spin"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/spin-e0f2e63bdad8e090/lib-spin`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.096178375s  INFO prepare_target{force=false package_id=spin v0.5.2 target="spin"}: cargo::core::compiler::fingerprint: fingerprint error for spin v0.5.2/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("spin", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spin-0.5.2/src/lib.rs", Edition2015) }
+   0.096184959s  INFO prepare_target{force=false package_id=spin v0.5.2 target="spin"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/spin-3df01302630c15a8/lib-spin`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.096478084s  INFO prepare_target{force=false package_id=volatile v0.2.7 target="volatile"}: cargo::core::compiler::fingerprint: fingerprint error for volatile v0.2.7/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("volatile", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/volatile-0.2.7/src/lib.rs", Edition2015) }
+   0.096485834s  INFO prepare_target{force=false package_id=volatile v0.2.7 target="volatile"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/volatile-69aca85c8f6d96eb/lib-volatile`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.096778542s  INFO prepare_target{force=false package_id=x86_64 v0.15.4 target="x86_64"}: cargo::core::compiler::fingerprint: fingerprint error for x86_64 v0.15.4/Check { test: false }/TargetInner { ..: lib_target("x86_64", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/x86_64-0.15.4/src/lib.rs", Edition2018) }
+   0.096785292s  INFO prepare_target{force=false package_id=x86_64 v0.15.4 target="x86_64"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/x86_64-280b06f8c1a2a59b/lib-x86_64`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.097237875s  INFO prepare_target{force=false package_id=bit_field v0.10.3 target="bit_field"}: cargo::core::compiler::fingerprint: fingerprint error for bit_field v0.10.3/Check { test: false }/TargetInner { ..: lib_target("bit_field", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bit_field-0.10.3/src/lib.rs", Edition2015) }
+   0.097244375s  INFO prepare_target{force=false package_id=bit_field v0.10.3 target="bit_field"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/bit_field-449a9f7d159550a0/lib-bit_field`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.097530834s  INFO prepare_target{force=false package_id=bitflags v2.11.1 target="bitflags"}: cargo::core::compiler::fingerprint: fingerprint error for bitflags v2.11.1/Check { test: false }/TargetInner { ..: lib_target("bitflags", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bitflags-2.11.1/src/lib.rs", Edition2021) }
+   0.097537542s  INFO prepare_target{force=false package_id=bitflags v2.11.1 target="bitflags"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/bitflags-4e94f449d565d880/lib-bitflags`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.098336667s  INFO prepare_target{force=false package_id=volatile v0.4.6 target="volatile"}: cargo::core::compiler::fingerprint: fingerprint error for volatile v0.4.6/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("volatile", ["lib"], "/Users/adharsh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/volatile-0.4.6/src/lib.rs", Edition2015) }
+   0.098343334s  INFO prepare_target{force=false package_id=volatile v0.4.6 target="volatile"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/volatile-01a0130a99af2d17/lib-volatile`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.098689709s  INFO prepare_target{force=false package_id=FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1) target="FeOSMK1"}: cargo::core::compiler::fingerprint: fingerprint error for FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1)/Check { test: true }/TargetInner { name: "FeOSMK1", benched: false, doc: true, ..: with_path("/Users/adharsh/Desktop/FeOS/FeOSMK1/src/main.rs", Edition2024) }
+   0.098696834s  INFO prepare_target{force=false package_id=FeOSMK1 v0.1.0 (/Users/adharsh/Desktop/FeOS/FeOSMK1) target="FeOSMK1"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/adharsh/Desktop/FeOS/FeOSMK1/target/x86_64-FeOSMK1/debug/.fingerprint/FeOSMK1-c3ed7fadb0110975/test-bin-FeOSMK1`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: <std::backtrace::Backtrace>::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   7: cargo::ops::cargo_compile::compile_ws
+   8: cargo::ops::cargo_compile::compile_with_exec
+   9: cargo::ops::cargo_compile::compile
+  10: cargo::commands::check::exec
+  11: <cargo::cli::Exec>::exec
+  12: cargo::main
+  13: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  14: std::rt::lang_start::<()>::{closure#0}
+  15: std::rt::lang_start_internal
+  16: _main
+   Compiling core v0.0.0 (/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/core)
+   Compiling compiler_builtins v0.1.160 (/Users/adharsh/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/compiler-builtins/compiler-builtins)
+    Checking volatile v0.4.6
+    Checking bitflags v2.11.1
+    Checking bit_field v0.10.3
+    Checking spin v0.9.8
+    Checking bootloader v0.9.34
+    Checking spin v0.5.2
+    Checking volatile v0.2.7
+error: could not compile `bootloader` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `volatile` (lib) due to 1 previous error
+error: could not compile `volatile` (lib) due to 1 previous error
+error: could not compile `bit_field` (lib) due to 1 previous error
+error: could not compile `spin` (lib) due to 1 previous error
+error: could not compile `spin` (lib) due to 1 previous error
+error: could not compile `bitflags` (lib) due to 1 previous error
