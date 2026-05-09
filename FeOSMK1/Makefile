@@ -16,5 +16,4 @@ terminate:
 	pkill qemu-system-x86_64
 
 clean:
-	rm -rf target/x86_64-FeOSMK1
-	rm target/.rustc_info.json
+	rm -rf target
