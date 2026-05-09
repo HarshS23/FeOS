@@ -16,4 +16,4 @@ terminate:
 	pkill qemu-system-x86_64
 
 clean:
-	rm -rf FeOSMK1/target/x86_64-FeOSMK1
+	rm -rf target

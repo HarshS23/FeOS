@@ -2,6 +2,8 @@
 #![test_runner(crate::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
+
+
 /*
 =========================================================================
 |                            Compilation Command                        |
@@ -45,12 +47,32 @@ return:
 
 #![no_main] // disable all rust level entry points
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[repr(u32)]
+// setting up Qemu exit codes 
+pub enum QEMUExitCode{
+        Success = 0x10,
+        Failed = 0x11,
+}
+
+pub fn exit_qemu(exit_code: QEMUExitCode){
+        use x86_64::instructions::port::Port;
+
+        unsafe{
+                let mut port = Port::new(0xf4); // creating a new port at oxf4
+                port.write(exit_code as u32);
+
+        }
+}
+
+
+
 // making a custom testing frame work 
 
 // modules --> like #include in C/C++
 mod vga_buffer;
 
-use core::panic::PanicInfo;
+use core::{panic::PanicInfo, prelude::v1::derive};
 
 #[panic_handler]
 fn panic(info: &PanicInfo) -> !{
@@ -62,9 +84,12 @@ fn panic(info: &PanicInfo) -> !{
 #[cfg(test)]
 pub fn test_runner(tests: &[&dyn Fn()]) {
         println!("Running Tests: {}", tests.len());
-        for i in tests{
-                i();
+        for test in tests{
+                test();
         }
+
+        // the qemu exit code 
+        exit_qemu(QEMUExitCode::Success);
 }
 
 #[unsafe(no_mangle)]
@@ -82,6 +107,8 @@ fn trivial_asseration(){
         assert_eq!(1,1);
         println!("PASS")
 }
+
+
 
 // #[test_case]
 // fn fail_test(){
