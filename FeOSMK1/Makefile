@@ -17,4 +17,8 @@ terminate:
 
 clean:
 	rm -rf target
-	# test
+
+save:
+	make clean
+	git add .
+	git commit -m "MAKEFILE: SAVING COMMAND (save)"
