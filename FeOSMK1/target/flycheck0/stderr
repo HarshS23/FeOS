@@ -1,0 +1,3 @@
+warning: unused manifest key: dependencies.lazy_static.uart_16550
+warning: unused manifest key: dependencies.lazy_static.x86_64
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.07s

@@ -17,4 +17,3 @@ terminate:
 
 clean:
 	rm -rf target
-	# test
