@@ -71,6 +71,8 @@ pub fn exit_qemu(exit_code: QEMUExitCode){
 
 // modules --> like #include in C/C++
 mod vga_buffer;
+mod serial;
+
 
 use core::{panic::PanicInfo, prelude::v1::derive};
 
@@ -83,7 +85,8 @@ fn panic(info: &PanicInfo) -> !{
 
 #[cfg(test)]
 pub fn test_runner(tests: &[&dyn Fn()]) {
-        println!("Running Tests: {}", tests.len());
+        //println!("Running Tests: {}", tests.len());
+        serial_println!("Running tests: {}", tests.len());
         for test in tests{
                 test();
         }
@@ -101,11 +104,23 @@ pub extern "C" fn _start() -> ! {
     loop {} //- this is unreachable after the panic happens 
 }
 
+
+
+
+
 #[test_case]
 fn trivial_asseration(){
-        println!("TEST 1| TEST RESULT -->");
+        // println!("TEST 1| TEST RESULT -->");
+        // assert_eq!(1,1);
+        // println!("PASS")
+
+        serial_print!("Triv assersation\n");
         assert_eq!(1,1);
-        println!("PASS")
+        serial_println!(" PASS");
+
+
+
+        
 }
 
 
