@@ -197,3 +197,26 @@ pub fn _print(args: fmt::Arguments) {
     WRITER.lock().write_fmt(args).unwrap();
 }
 
+
+/*
+================================================================
+                Testing Print line function
+================================================================
+
+*/
+
+// The test just prints something to the VGA buffer. 
+// If it finishes without panicking, 
+// it means that the println invocation did not panic either
+
+#[test_case]
+fn test_print_line(){
+    println!("THIS IS THE TEST PRINT LINE FUNCTION TEST");
+}
+
+#[test_case]
+fn many_print_line_test(){
+    for i in 0..200{
+        println!("THIS IS A TEST {}", i);
+    }
+}
