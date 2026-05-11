@@ -220,3 +220,15 @@ fn many_print_line_test(){
         println!("THIS IS A TEST {}", i);
     }
 }
+
+#[test_case]
+fn test_println_output(){
+    let s = "This is a test string, we are checking if it displays on the output";
+    println!("{}", s);
+
+    for (i, j) in s.chars().enumerate(){
+        let screen_char = WRITER.lock().buffer.chars[BUFFER_HEIGHT - 2][i].read();
+        assert_eq!(char::from(screen_char.ascii_character), j);
+
+    }
+}
