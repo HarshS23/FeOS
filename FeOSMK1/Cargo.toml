@@ -36,7 +36,10 @@ bench = false # do not build binary in bench mode
 # this is too be able to close the QEMU simulator and terminate the OS 
 # without needing to do ctrl + C 
 [package.metadata.bootimage]
-test-args = ["-device", "isa-debug-exit,iobase=0xf4,iosize=0x04", "-serial", "stdio"]
+test-args = [
+    "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04", "-serial", "stdio", 
+    "-display", "none"
+]
 test-success-exit-code = 33 # (0x10 << 1 | 1)
 # isa-debug uses port mapped I/O
 # iobase specifies which port address the device should live 

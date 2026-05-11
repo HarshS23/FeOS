@@ -74,11 +74,22 @@ mod vga_buffer;
 mod serial;
 
 
-use core::{panic::PanicInfo, prelude::v1::derive};
+use core::panic::PanicInfo;
 
+#[cfg(not(test))]  // for not test 
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+        println!("{}",info);
+        loop{}
+}
+
+
+#[cfg(test)] // for test
 #[panic_handler]
 fn panic(info: &PanicInfo) -> !{
-        println!("{}", info);
+        serial_println!("FAILED \n");
+        serial_println!("Error Type: {}\n", info);
+        exit_qemu(QEMUExitCode::Failed);
         loop{}
 }
 
@@ -117,11 +128,8 @@ fn trivial_asseration(){
         serial_print!("Triv assersation\n");
         assert_eq!(1,1);
         serial_println!(" PASS");
-
-
-
-        
 }
+
 
 
 
