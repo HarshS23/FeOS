@@ -40,6 +40,7 @@ test-args = [
     "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04", "-serial", "stdio", 
     "-display", "none"
 ]
+test-timeout = 300 # allowing our test to run for a maximum of 300 seconds (5 minutes )
 test-success-exit-code = 33 # (0x10 << 1 | 1)
 # isa-debug uses port mapped I/O
 # iobase specifies which port address the device should live 
