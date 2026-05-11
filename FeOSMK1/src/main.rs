@@ -128,9 +128,9 @@ impl<T> Testable for T
 where T: Fn(), 
 {
         fn run(&self) -> () {
-            serial_println!(" \n{} -->", core::any::type_name::<T>()); // invoke the funciton name 
+            serial_print!(" \n{} --> ", core::any::type_name::<T>()); // invoke the funciton name 
             self(); // check if it panics or not 
-            serial_println!("OKAY");  // prints okay if it did not panic
+            serial_println!("RESULT: TEST PASSED");  // prints okay if it did not panic
         }
 
 }
