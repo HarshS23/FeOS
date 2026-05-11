@@ -95,11 +95,11 @@ fn panic(info: &PanicInfo) -> !{
 
 
 #[cfg(test)]
-pub fn test_runner(tests: &[&dyn Fn()]) {
+pub fn test_runner(tests: &[&dyn Testable]) {
         //println!("Running Tests: {}", tests.len());
         serial_println!("Running tests: {}", tests.len());
         for test in tests{
-                test();
+                test.run();
         }
 
         // the qemu exit code 
@@ -117,6 +117,23 @@ pub extern "C" fn _start() -> ! {
 
 
 
+//  dont want to have multiple serial_printline everywhere 
+// so its better to make it automatic
+pub trait Testable {
+        fn run(&self) -> ();
+
+}
+
+impl<T> Testable for T 
+where T: Fn(), 
+{
+        fn run(&self) -> () {
+            serial_println!(" \n{} -->", core::any::type_name::<T>()); // invoke the funciton name 
+            self(); // check if it panics or not 
+            serial_println!("OKAY");  // prints okay if it did not panic
+        }
+
+}
 
 
 #[test_case]
@@ -125,24 +142,7 @@ fn trivial_asseration(){
         // assert_eq!(1,1);
         // println!("PASS")
 
-        serial_print!("Triv assersation\n");
+        //serial_print!("Triv assersation\n");
         assert_eq!(1,1);
-        serial_println!(" PASS");
+        //serial_println!(" PASS");
 }
-
-
-
-
-// #[test_case]
-// fn fail_test(){
-//         println!("TEST 2 | TEST RESULT ---> ");
-//         assert_eq!(1,0);
-//         println!("FAIL");
-// }
-
-
-
-//static HELLO: &[u8] = b"Hello World!"
-// cargo build --target thumbv7em-none-eabihf
-// we use a custom target that describes the x86_64 bit architecture
-
