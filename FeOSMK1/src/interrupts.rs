@@ -62,21 +62,56 @@ In this Im not going to build a IDT rather use the one given from the x86_64 ver
 */
 
 
-pub mod Interrupts;
 
-// this is basically 
-// x86_64/structures/idt/InterruptDescriptorTable -- basically a file path
-use x86_64::structures::idt::InterruptDiscriptorTable;
+// use x86_64::structures::idt::InterruptDescriptorTable;
 
-// initlizing the Interupt Descriptor table 
+// this implementation requires no unsafe blocks 
+// lazy_static does use unsafe behind the scene
+
+
+use lazy_static::lazy_static;
+use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
+use crate::println;
+
+lazy_static! {
+
+    // initlizing the Interupt Descriptor table 
+    // using static means it exists during the entire duration of the program. 
+    // using mut means we can modify the IDT 
+    static ref IDT: InterruptDescriptorTable = {
+        let mut idt = InterruptDescriptorTable::new();
+        idt.breakpoint.set_handler_fn(breakpoint_handler);
+        idt
+
+    };
+}
+
 pub fn init_idt(){
-    // let variable idt be a mutable variable (changable in the futue)
-    // and let it be a new InterruptDescriptorTable 
-    let mut idt = InterruptDescriptorTable::new();
+    IDT.load()
 }
 
-extern "x86_64-interrupt" fn breakpoint_handler(
-    stack_frame: InterruptStackFrame)
-{
-    println!("EXCEPTION: BREAKPOINT\n{:#?}",stack_frame);
-}
+
+// // this is basically 
+// // x86_64/structures/idt/InterruptDescriptorTable -- basically a file path
+// use x86_64::structures::idt::InterruptDiscriptorTable;
+
+// // initlizing the Interupt Descriptor table 
+// // using static means it exists during the entire duration of the program. 
+// // using mut means we can modify the IDT 
+// static mut IDT: InteruptDiscriptorTable= InterruptDescriptorTable::new(); // do this so it has a static lifetime 
+
+// pub fn init_idt(){
+//     // let variable idt be a mutable variable (changable in the futue)
+//     // and let it be a new InterruptDescriptorTable 
+//     //let mut idt = InterruptDescriptorTable::new();
+//     unsafe{ // static muts are prone to data race so wrap in unsafe block 
+//         IDT.breakpoint.set_handler_fn(breakpoint_handler);
+//         IDT.load()
+//     }
+// }
+
+// extern "x86_64-interrupt" fn breakpoint_handler(
+//     stack_frame: InterruptStackFrame)
+// {
+//     println!("EXCEPTION: BREAKPOINT\n{:#?}",stack_frame);
+// }

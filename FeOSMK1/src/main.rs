@@ -44,7 +44,7 @@ return:
 */
 
 
-use core::panic::PanicInfo;
+use core::{arch::x86_64, panic::PanicInfo};
 use FeOSMK1::println;
 
 
@@ -53,8 +53,16 @@ use FeOSMK1::println;
 pub extern "C" fn _start() -> ! {
     println!("Hello World {}", "!");
 
+    FeOSMK1::init();
+    
+
+    // invoking the breakpoint exception 
+    x86_64::instructiions::interupts::int3();
+
     #[cfg(test)]
     test_main();
+
+    println!("It did not crash");
     //panic!("some panic message");
     loop {} //- this is unreachable after the panic happens 
 

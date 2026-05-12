@@ -7,8 +7,11 @@
 
 use core::panic::PanicInfo;
 
+//use x86_64::instructions::interrupts;
+
 pub mod vga_buffer;
 pub mod serial;
+pub mod interrupts;
 
 pub trait Testable {
         fn run(&self) -> ();
@@ -85,3 +88,8 @@ pub fn exit_qemu(exit_code: QEMUExitCode){
         }
 }
 
+
+// Interrupts section 
+pub fn init(){
+    interrupts::init_idt();
+}
