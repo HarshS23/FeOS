@@ -6,7 +6,7 @@ bootimage:
 run: 
 	cargo bootimage
 	cargo build 
-	qemu-system-x86_64 -drive format=raw,file=target/x86_64-FeOSMK1/debug/bootimage-FeOSMK1.bin
+	qemu-system-x86_64 -drive format=raw,file=target/x86_64-FeOSMK1/debug/bootimage-FeOSMK1.bin 
 build:
 	cargo bootimage 
 	cargo build
