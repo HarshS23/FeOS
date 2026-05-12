@@ -50,3 +50,33 @@ In this Im not going to build a IDT rather use the one given from the x86_64 ver
 
 
 */
+
+
+
+/* 
+==================================================================================
+
+                            Interrupts Implementation 
+
+==================================================================================
+*/
+
+
+pub mod Interrupts;
+
+// this is basically 
+// x86_64/structures/idt/InterruptDescriptorTable -- basically a file path
+use x86_64::structures::idt::InterruptDiscriptorTable;
+
+// initlizing the Interupt Descriptor table 
+pub fn init_idt(){
+    // let variable idt be a mutable variable (changable in the futue)
+    // and let it be a new InterruptDescriptorTable 
+    let mut idt = InterruptDescriptorTable::new();
+}
+
+extern "x86_64-interrupt" fn breakpoint_handler(
+    stack_frame: InterruptStackFrame)
+{
+    println!("EXCEPTION: BREAKPOINT\n{:#?}",stack_frame);
+}
