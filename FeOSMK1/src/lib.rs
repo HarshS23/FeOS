@@ -92,5 +92,8 @@ pub fn exit_qemu(exit_code: QEMUExitCode){
 
 // Interrupts section 
 pub fn init(){
-    interrupts::init_idt();
+        gdt::init();
+        interrupts::init_idt();
+
+
 }
