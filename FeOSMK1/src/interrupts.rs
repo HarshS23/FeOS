@@ -99,8 +99,14 @@ extern "x86-interrupt" fn breakpoint_handler(
 } 
 
 // Double fault handler code 
+// now it works becuase, cpu tries to write to  0xddcebaff 
+// causes a page fault, the cpu checks the idt and sees no handler function 
+// then a double fault ocurs 
+// the cpu jumps to the double fault handler
+// now triple fault does not occur and does not cause the boot up loop 
+// since the cpu can just call the double fault handler  
 extern "x86-interrupt" fn double_fault_handler(
-    stack_frame: InterruptStackFrame, error_code: u64) -> ! {
+    stack_frame: InterruptStackFrame, _error_code: u64) -> ! {
         panic!("EXCEPTION: DOUBLE FAULT\n{:#?}", stack_frame);
         }
 
