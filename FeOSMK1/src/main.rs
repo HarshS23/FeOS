@@ -60,9 +60,13 @@ pub extern "C" fn _start() -> ! {
     FeOSMK1::init();
     
     // invoking the breakpoint exception 
+    //x86_64::instructions::interrupts::int3();
 
-    x86_64::instructions::interrupts::int3();
-
+    // triggering a page fault 
+    unsafe {
+        *(0xddcebaff as *mut u8) = 42;
+       
+    };
 
     #[cfg(test)]
     test_main();
@@ -87,3 +91,11 @@ fn panic(info: &PanicInfo) -> ! {
 fn panic(info: &PanicInfo) -> !{
         FeOSMK1::test_panic_handler(info)
 }
+
+
+/*
+================================================================
+                        Double Faults
+================================================================
+*/
+

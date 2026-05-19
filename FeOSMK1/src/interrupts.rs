@@ -81,6 +81,7 @@ lazy_static! {
     static ref IDT: InterruptDescriptorTable = {
         let mut idt = InterruptDescriptorTable::new();
         idt.breakpoint.set_handler_fn(breakpoint_handler);
+        idt.double_fault.set_handler_fn(double_fault_handler);
         idt
 
     };
@@ -96,6 +97,13 @@ extern "x86-interrupt" fn breakpoint_handler(
 {
     println!("EXCEPTION: BREAKPOINT\n{:#?}",stack_frame);
 } 
+
+// Double fault handler code 
+extern "x86-interrupt" fn double_fault_handler(
+    stack_frame: InterruptStackFrame, error_code: u64) -> ! {
+        panic!("EXCEPTION: DOUBLE FAULT\n{:#?}", stack_frame);
+        }
+
 
 // // this is basically 
 // // x86_64/structures/idt/InterruptDescriptorTable -- basically a file path
