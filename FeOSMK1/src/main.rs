@@ -65,8 +65,16 @@ pub extern "C" fn _start() -> ! {
     // triggering a page fault 
     unsafe {
         *(0xddcebaff as *mut u8) = 42;
-       
     };
+    
+
+    // setting up a tripple fault 
+    fn stack_overflow(){
+        stack_overflow(); // for each recursionn, the return address is pushed 
+    }
+
+    // triggering a stack overflow
+    stack_overflow();
 
     #[cfg(test)]
     test_main();
