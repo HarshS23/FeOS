@@ -72,6 +72,7 @@ In this Im not going to build a IDT rather use the one given from the x86_64 ver
 use lazy_static::lazy_static;
 use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
 use crate::println;
+use crate::gdt;
 
 lazy_static! {
 
@@ -81,7 +82,12 @@ lazy_static! {
     static ref IDT: InterruptDescriptorTable = {
         let mut idt = InterruptDescriptorTable::new();
         idt.breakpoint.set_handler_fn(breakpoint_handler);
-        idt.double_fault.set_handler_fn(double_fault_handler);
+        
+        unsafe{
+            idt.double_fault.set_handler_fn(double_fault_handler). set_stack_index(
+                gdt::DOUBLE_FAULT_IST_INDEX);
+        }
+
         idt
 
     };
@@ -98,17 +104,38 @@ extern "x86-interrupt" fn breakpoint_handler(
     println!("EXCEPTION: BREAKPOINT\n{:#?}",stack_frame);
 } 
 
-// Double fault handler code 
-// now it works becuase, cpu tries to write to  0xddcebaff 
-// causes a page fault, the cpu checks the idt and sees no handler function 
-// then a double fault ocurs 
-// the cpu jumps to the double fault handler
-// now triple fault does not occur and does not cause the boot up loop 
-// since the cpu can just call the double fault handler  
+
+
+/*
+Double fault handler code 
+now it works becuase, cpu tries to write to  0xddcebaff 
+causes a page fault, the cpu checks the idt and sees no handler function 
+then a double fault ocurs 
+the cpu jumps to the double fault handler
+now triple fault does not occur and does not cause the boot up loop 
+since the cpu can just call the double fault handler  
+Double fault is primarily for page, stack segments and general protection faults
+*/
+
 extern "x86-interrupt" fn double_fault_handler(
     stack_frame: InterruptStackFrame, _error_code: u64) -> ! {
         panic!("EXCEPTION: DOUBLE FAULT\n{:#?}", stack_frame);
         }
+
+
+/*
+Need a triple fault handler 
+
+What happens if the kernal overflows its stack and the gaurd page is hit? 
+Since the page is not mapped to any physical frame, accessing it causes a page fault instead of silently ocrrupting other 
+memory The bootloader setups up a guard page for the kernal stack, so a stack over flow causes a page fault. When the page 
+fault occures the cpu looks up the page fault handler in the IDT and tries to push the Interrupt stack frame onto the stack 
+However, the current stack poiinter still points to the non present guard page. This a second page fault occurs which causes
+a double fault. after the double fault the cpue tries to push it onto the exception stack frame which causes a theird page fault 
+
+*/
+
+
 
 
 // // this is basically 
