@@ -31,7 +31,4 @@ pub extern "C" fn _start() -> ! {
 }
 
 
-/*
-                            Making the test 
-*/
 
