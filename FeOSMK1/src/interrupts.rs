@@ -70,11 +70,14 @@ In this Im not going to build a IDT rather use the one given from the x86_64 ver
 
 
 use lazy_static::lazy_static;
+use x86_64::structures::idt::InterruptStackFrameValue;
 use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
 use crate::println;
+use crate::print;
 use crate::gdt;
 use pic8259::ChainedPics;
 use spin;
+
 
 // PIC = Programmable Interupt Controller 
 pub const PIC_1_OFFSET: u8 = 32;
@@ -95,10 +98,26 @@ lazy_static! {
                 gdt::DOUBLE_FAULT_IST_INDEX); 
         }
 
+        idt[InterruptIndex::Timer.as_u8()]
+            .set_handler_fn(timer_interrupt_handler); // new
+
+
+
         idt
 
     };
 }
+
+extern "x86-interrupt" fn timer_interrupt_handler (_stack_frame:InterruptStackFrame){
+    print!(".");
+
+    unsafe {
+        PICS.lock().notify_end_of_interrupt(InterruptIndex::Timer.as_u8());
+    }
+
+}
+
+
 
 pub fn init_idt(){
     IDT.load()
@@ -146,3 +165,23 @@ extern "x86-interrupt" fn double_fault_handler(
 //setting the range to 32 - 47
 pub static PICS: spin::Mutex<ChainedPics> = 
 spin::Mutex::new(unsafe {ChainedPics::new(PIC_1_OFFSET, PIC_2_OFFSET)});
+
+
+#[derive(Debug, Clone,Copy)]
+#[repr(u8)]
+pub enum InterruptIndex {
+    Timer = PIC_1_OFFSET,
+
+}
+
+impl InterruptIndex {
+    fn as_u8(self) -> u8{
+        self as u8
+    }
+
+    fn as_usize(self) -> usize {
+        usize::from(self.as_u8())
+    }
+    
+}
+
