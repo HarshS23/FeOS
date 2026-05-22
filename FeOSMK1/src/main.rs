@@ -63,25 +63,29 @@ pub extern "C" fn _start() -> ! {
     //x86_64::instructions::interrupts::int3();
 
     // triggering a page fault 
-    unsafe {
-        *(0xddcebaff as *mut u8) = 42;
-    };
+//     unsafe {
+//         *(0xddcebaff as *mut u8) = 42;
+//     };
     
 
     // setting up a tripple fault 
-    fn stack_overflow(){
-        stack_overflow(); // for each recursionn, the return address is pushed 
-    }
+//     fn stack_overflow(){
+//         stack_overflow(); // for each recursionn, the return address is pushed 
+//     }
 
     // triggering a stack overflow
-    stack_overflow();
+    //stack_overflow();
 
     #[cfg(test)]
     test_main();
 
     println!("It did not crash");
+
+    loop { x86_64::instructions::hlt(); }
+
     //panic!("some panic message");
-    loop {} //- this is unreachable after the panic happens 
+    //loop {} //- this is unreachable after the panic happens 
+    
 
 }
 

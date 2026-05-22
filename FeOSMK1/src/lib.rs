@@ -66,9 +66,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 
 /*
-
 moving qemu exit codes into lib.rs 
-
 */
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -92,8 +90,10 @@ pub fn exit_qemu(exit_code: QEMUExitCode){
 
 // Interrupts section 
 pub fn init(){
-        gdt::init();
-        interrupts::init_idt();
+        gdt::init(); // global descriptior table must come first 
+        interrupts::init_idt(); // then the interupt descriptor table
+        unsafe{interrupts::PICS.lock().initialize()}; // initlize the 8259 PIC 
+        x86_64::instructions::interrupts::enable(); // enabling interrupts on x86
 
 
 }

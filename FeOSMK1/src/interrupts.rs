@@ -70,9 +70,19 @@ In this Im not going to build a IDT rather use the one given from the x86_64 ver
 
 
 use lazy_static::lazy_static;
+use x86_64::structures::idt::InterruptStackFrameValue;
 use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
 use crate::println;
+use crate::print;
 use crate::gdt;
+use pic8259::ChainedPics;
+use spin;
+
+
+// PIC = Programmable Interupt Controller 
+pub const PIC_1_OFFSET: u8 = 32;
+pub const PIC_2_OFFSET: u8 = PIC_1_OFFSET + 8;
+
 
 lazy_static! {
 
@@ -85,13 +95,29 @@ lazy_static! {
         
         unsafe{
             idt.double_fault.set_handler_fn(double_fault_handler). set_stack_index(
-                gdt::DOUBLE_FAULT_IST_INDEX);
+                gdt::DOUBLE_FAULT_IST_INDEX); 
         }
+
+        idt[InterruptIndex::Timer.as_u8()]
+            .set_handler_fn(timer_interrupt_handler); // new
+
+
 
         idt
 
     };
 }
+
+extern "x86-interrupt" fn timer_interrupt_handler (_stack_frame:InterruptStackFrame){
+    print!(".");
+
+    unsafe {
+        PICS.lock().notify_end_of_interrupt(InterruptIndex::Timer.as_u8());
+    }
+
+}
+
+
 
 pub fn init_idt(){
     IDT.load()
@@ -117,12 +143,6 @@ since the cpu can just call the double fault handler
 Double fault is primarily for page, stack segments and general protection faults
 */
 
-extern "x86-interrupt" fn double_fault_handler(
-    stack_frame: InterruptStackFrame, _error_code: u64) -> ! {
-        panic!("EXCEPTION: DOUBLE FAULT\n{:#?}", stack_frame);
-        }
-
-
 /*
 Need a triple fault handler 
 
@@ -136,23 +156,32 @@ a double fault. after the double fault the cpue tries to push it onto the except
 */
 
 
+extern "x86-interrupt" fn double_fault_handler(
+    stack_frame: InterruptStackFrame, _error_code: u64) -> ! {
+        panic!("EXCEPTION: DOUBLE FAULT\n{:#?}", stack_frame);
+        }
 
 
-// // this is basically 
-// // x86_64/structures/idt/InterruptDescriptorTable -- basically a file path
-// use x86_64::structures::idt::InterruptDiscriptorTable;
+//setting the range to 32 - 47
+pub static PICS: spin::Mutex<ChainedPics> = 
+spin::Mutex::new(unsafe {ChainedPics::new(PIC_1_OFFSET, PIC_2_OFFSET)});
 
-// // initlizing the Interupt Descriptor table 
-// // using static means it exists during the entire duration of the program. 
-// // using mut means we can modify the IDT 
-// static mut IDT: InteruptDiscriptorTable= InterruptDescriptorTable::new(); // do this so it has a static lifetime 
 
-// pub fn init_idt(){
-//     // let variable idt be a mutable variable (changable in the futue)
-//     // and let it be a new InterruptDescriptorTable 
-//     //let mut idt = InterruptDescriptorTable::new();
-//     unsafe{ // static muts are prone to data race so wrap in unsafe block 
-//         IDT.breakpoint.set_handler_fn(breakpoint_handler);
-//         IDT.load()
-//     }
-// }
+#[derive(Debug, Clone,Copy)]
+#[repr(u8)]
+pub enum InterruptIndex {
+    Timer = PIC_1_OFFSET,
+
+}
+
+impl InterruptIndex {
+    fn as_u8(self) -> u8{
+        self as u8
+    }
+
+    fn as_usize(self) -> usize {
+        usize::from(self.as_u8())
+    }
+    
+}
+
